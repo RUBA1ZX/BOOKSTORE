@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Library</title>
+    <style>
+        /* Page and content styling */
+        body { font-family: Arial, sans-serif; direction: rtl; text-align: right; }
+        .book { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .available { color: green; font-weight: bold; } /* Green for available books */
+        .not-available { color: red; font-weight: bold; } /* Red for unavailable books */
+    </style>
+</head>
+<body>
+
+    <h1>Library Inventory</h1>
+    <div id="library"></div> <!-- This is where we'll display the books -->
+
+    <script>
+        // Here we store the book data in an "Array"
+        const books = [
+            {
+                "title": "The Great Gatsby",
+                "author": { "firstName": "F. Scott", "lastName": "Fitzgerald" },
+                "publicationYear": 1925,
+                "details": { "publisher": "Charles Scribner's Sons", "pageCount": 218, "available": true }
+            },
+            {
+                "title": "To Kill a Mockingbird",
+                "author": { "firstName": "Harper", "lastName": "Lee" },
+                "publicationYear": 1960,
+                "details": { "publisher": "J.B. Lippincott & Co.", "pageCount": 281, "available": true }
+            },
+            {
+                "title": "1984",
+                "author": { "firstName": "George", "lastName": "Orwell" },
+                "publicationYear": 1949,
+                "details": { "publisher": "Secker & Warburg", "pageCount": 328, "available": false }
+            }
+        ];
+
+        // Function to display books on the page
+        function displayBooks() {
+            const libraryDiv = document.getElementById("library"); // Get the place where books will be displayed
+            
+            books.forEach(book => { // Loop through each book in the array and add it to the page
+                const bookDiv = document.createElement("div"); // Create a new element for each book
+                bookDiv.classList.add("book"); // Add a class to style it
+
+                bookDiv.innerHTML = `
+                    <h2>${book.title}</h2>
+                    <p><strong>Author:</strong> ${book.author.firstName} ${book.author.lastName}</p>
+                    <p><strong>Publication Year:</strong> ${book.publicationYear}</p>
+                    <p><strong>Publisher:</strong> ${book.details.publisher}</p>
+                    <p><strong>Page Count:</strong> ${book.details.pageCount}</p>
+                    <p class="${book.details.available ? 'available' : 'not-available'}">
+                        ${book.details.available ? "Available" : "Unavailable"}
+                    </p>
+                `;
+                
+                libraryDiv.appendChild(bookDiv); // Add the book element to the page
+            });
+        }
+
+        displayBooks(); // Call the function to display the books as soon as the page loads
+    </script>
+
+</body>
+</html>
